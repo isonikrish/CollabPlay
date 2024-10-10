@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react'
 
+
 function Hero() {
+    
     useGSAP(() => {
         gsap.fromTo("#heading", {
             y: -100,
@@ -52,7 +54,7 @@ function Hero() {
                 </h1>
 
                 <p className="text-lg sm:text-xl font-medium opacity-85 mb-8" id="tagline">
-                    Host live sessions, invite listeners, and create music together on <span className="font-bold text-white">CollabPlay</span>.
+                    Host live sessions, invite listeners, and listen music together on <span className="font-bold text-white">CollabPlay</span>.
                 </p>
 
                 <div className="flex justify-center space-x-6">
@@ -60,8 +62,8 @@ function Hero() {
                         id="start-button" 
                         className="bg-button text-white font-semibold px-8 py-4 rounded-full shadow-lg transition-transform duration-300 transform hover:scale-105 hover:bg-button-hover focus:outline-none"
                     >
-                        Start Your Session
-                    </button>
+                        Start Live Jam
+                    </button>   
                     
                     <button 
                         id="learn-button" 

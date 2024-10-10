@@ -21,7 +21,7 @@ function Footer() {
             scrollTrigger: {
                 trigger: ".developer-info",
                 start: "top 80%",  // When the top of the element reaches 80% of the viewport
-                end: "top 50%",    // End the animation when the top of the element reaches 30%
+                end: "top 60%",    // End the animation when the top of the element reaches 30%
                 scrub: 0.5,
             }
         });
@@ -39,7 +39,7 @@ function Footer() {
             scrollTrigger: {
                 trigger: ".social-media",
                 start: "top 80%",
-                end: "top 50%",
+                end: "top 60%",
                 scrub: 0.5,
             }
         });

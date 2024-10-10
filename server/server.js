@@ -22,7 +22,5 @@ app.use(cookieParser());
 app.get('/',(req,res)=>{
     res.send("hello world");
 })
-http://localhost:8000/api/spotify/getAccessToken?
-
 app.use('/api/spotify',spotifyRoutes);
 app.listen(8000,()=>console.log("Server started"))

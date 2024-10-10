@@ -1,12 +1,17 @@
-import React, { Suspense } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Suspense, useContext, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import DefaultPic from '/default.svg';
 import { FaSpotify } from "react-icons/fa6";
 import { CiStreamOn } from "react-icons/ci";
+import { RiArrowDropDownLine, RiArrowDropUpLine } from "react-icons/ri";
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
+import MainContext from '../contexts/MainContext';
 
 function Navbar() {
+  const navigate = useNavigate();
+  const [isDropDown, setIsDropDown] = useState(false);
+  const { accessToken, userProfile } = useContext(MainContext);
 
   const scrollToFeatures = () => {
     const featuresSection = document.getElementById("features");
@@ -114,7 +119,7 @@ function Navbar() {
           >
             Features
           </li>
-          <Link to="/join-live">
+          <Link to="/join/28746">
             <li className="nav-item bg-minorBackground text-white rounded-md px-3 py-2 transition-colors duration-200 flex items-center space-x-2 justify-center w-[200px] cursor-pointer join-live-btn">
               <CiStreamOn className="text-xl mx-3" />
               Join a Live
@@ -123,22 +128,34 @@ function Navbar() {
         </ul>
 
         <div className="flex items-center space-x-4" id='login-btn'>
-          <button className=" bg-button text-white font-semibold px-5 py-2 rounded-lg shadow-md transition-transform duration-200 transform hover:scale-105 flex items-center space-x-2">
+          <button className=" bg-button text-white font-semibold px-5 py-2 rounded-lg shadow-md transition-transform duration-200 transform hover:scale-105 flex items-center space-x-2" onClick={() => navigate('/spotify/auth')}>
             <FaSpotify className="text-xl" />
             <span>Login</span>
           </button>
 
-          <div className="flex items-center space-x-2 cursor-pointer">
+          <div className="flex items-center cursor-pointer">
             <Suspense fallback={<div className="w-10 h-10 bg-gray-500 rounded-full" />}>
               <img
-                src={DefaultPic}
+                src={userProfile?.images?.[1]?.url || DefaultPic}
                 alt="defaultProfilePic"
                 loading="lazy"
                 className="w-10 h-10 rounded-full object-cover border-2 border-blue-400"
                 id='profile-pic'
               />
             </Suspense>
+
+            {isDropDown ? <RiArrowDropUpLine className='text-4xl select-none' onClick={() => setIsDropDown(prev => !prev)} /> : <RiArrowDropDownLine className='text-4xl select-none' onClick={() => setIsDropDown(prev => !prev)} />}
           </div>
+          {isDropDown && (
+            <div className="absolute right-0 top-[60px] bg-minorBackground w-[150px] h-[200px] shadow-lg rounded-lg text-white">
+              <ul className="flex flex-col space-y-2 p-3">
+                <Link to={'/your-profile'}><li className="py-2 px-2 border-b border-gray-300 hover:bg-hover cursor-pointer">Your account</li></Link>
+                <li className="py-2 px-2 border-b border-gray-300 hover:bg-hover cursor-pointer">Settings</li>
+                <li className="py-2 px-2 border-b border-gray-300 hover:bg-hover cursor-pointer">Sign out</li>
+              </ul>
+            </div>
+          )}
+
         </div>
       </div>
     </nav>

@@ -7,13 +7,13 @@ function Home() {
   useEffect(() => {
     const code = new URLSearchParams(window.location.search).get("code");
     if (code) {
-      getAccessToken(code);
+      setAccessToken(code);
       window.history.replaceState(null, null, window.location.pathname);
     }
   }, []);
-  const getAccessToken = async (code) => {
+  const setAccessToken = async (code) => {
     try {
-      const { data } = await axios.get(`http://localhost:8000/api/spotify/getAccessToken?code=${code}`, {
+      const { data } = await axios.get(`http://localhost:8000/api/spotify/setAccessToken?code=${code}`, {
         withCredentials: true,
       });
       // Handle response, store the access token, etc.
